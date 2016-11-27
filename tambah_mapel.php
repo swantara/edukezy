@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Tambah Mapel</title>
@@ -40,7 +41,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -72,9 +73,6 @@
         Edukezy
         <small>Tambah Mata Pelajaran</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="program.php"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -84,6 +82,11 @@
         <div class="col-md-12">
           <!-- About Me Box -->
           <div class="box box-primary">
+          <form
+          <?php if($_SESSION['status']!=4){ ?>
+            action="function/add_mapel.php"
+          <?php } ?>
+            method="post">
             <div class="box-header with-border">
               <h3 class="box-title">Data Program</h3>
             </div>
@@ -91,29 +94,43 @@
             <div class="box-body">
               <div class="form-group">
                 <label for="namaProgram">Nama Mapel</label>
-                <input type="text" class="form-control" id="namaProgram" placeholder="nama mata pelajaran">
+                <input name="nama" type="text" class="form-control" id="namaProgram" placeholder="Nama Mata Pelajaran">
               </div>
               <div class="form-group">
               <label>Tingkat</label>
-              <select class="form-control">
-                <option value="" disabled selected hidden>Pilih Tingkat</option>
-                <option value="0">SD</option>
-                <option value="1">SMP</option>
-                <option value="2">SMA</option>
-                <option value="3">SMK</option>
-                <option value="4">UMUM</option>
-              </select>
+                <select name="tingkat" class="form-control">
+                  <option value="" disabled selected hidden>Pilih Tingkat</option>
+
+                  <?php
+                  include 'function/connection.php';
+                  $query = "SELECT 
+                    tp.*
+                  FROM tb_tingkat_pendidikan AS tp";
+                  $result = mysql_query($query) or die(mysql_error());
+                  $rowcount = mysql_num_rows($result);
+
+                  if($rowcount > 0){
+                    while($row = mysql_fetch_array($result)){
+                  ?>
+
+                        <option value="<?= $row['id'];?>"><?php echo $row['nama'];?></option>
+
+                        <?php
+                    }
+                  }
+                  ?>
+
+                </select>
             </div>
               <!-- /.form group -->
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-              <div class=" pull-right">
-                <button type="submit" class="btn btn-default"><i class="fa fa-close"></i> Cancel</button>
-                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan</button>
-              </div>
+              <a href="mapel.php" class="btn btn-default"><i class="fa fa-close"></i> Cancel</a>
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Submit</button>
             </div>
           <!-- /.box-footer -->
+          </form>
           </div>
           <!-- /.box -->
         </div>

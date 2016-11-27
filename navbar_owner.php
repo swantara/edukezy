@@ -36,7 +36,7 @@
         </div>
         <div class="pull-left info">
           <input name='id' id='id' value='".$id."' type='hidden'>
-          <p><a href="profil_owner.php?id= <?php echo $id_owner;?>"><?= $_SESSION['username'] ?></a></p>
+          <p><a href="profil_owner.php?id=<?php echo $id_owner;?>"><?= $_SESSION['username'] ?></a></p>
           <a><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

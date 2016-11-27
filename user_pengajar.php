@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Pengajar</title>
@@ -18,6 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -36,7 +38,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -76,7 +78,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-            <a href="tambah_pengajar.php" class="btn btn-primary"><i class="fa fa-user-plus"></i> Tambah Pengajar</a></div>
+            <a
+            <?php if($_SESSION['status']!=4){ ?>
+              href="tambah_pengajar.php"
+            <?php } ?>
+            class="btn btn-primary"><i class="fa fa-user-plus"></i> Tambah Pengajar</a></div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -101,7 +107,7 @@
                       u.status
                     FROM 
                       tb_pengajar AS p
-                    INNER JOIN tb_cabang AS c ON c.id=p.zona_id
+                    LEFT JOIN tb_cabang AS c ON c.id=p.zona_id
                     INNER JOIN tb_users AS u ON u.id=p.user_id
                     WHERE
                       status='1'
@@ -132,9 +138,9 @@
                       tp.nama AS tingkat
                     FROM 
                       tb_pengajar AS p
-                    LEFT JOIN tb_mapel_pengajar AS mp ON mp.pengajar_id=p.id
-                    LEFT JOIN tb_mapel AS m ON m.id=mp.mapel_id
-                    LEFT JOIN tb_tingkat_pendidikan AS tp ON tp.id=m.tingkat_pendidikan
+                    JOIN tb_mapel_pengajar AS mp ON mp.pengajar_id=p.id
+                    JOIN tb_mapel AS m ON m.id=mp.mapel_id
+                    JOIN tb_tingkat_pendidikan AS tp ON tp.id=m.tingkat_pendidikan
                     WHERE
                       p.id = $id_param";
 
@@ -146,10 +152,10 @@
                         if( $rowB['mata_pelajaran'] != NULL){
                           echo $rowB['mata_pelajaran'] . " (" . $rowB['tingkat'] . ") <br/>";
                         }
-                        else{
-                          echo "-";
-                        }
                       }
+                    }
+                    else{
+                      echo "-";
                     }
                   ?>
 
@@ -160,12 +166,15 @@
                   </td>
                   <td>
                     <div class="btn-group-vertical">
-                      <button type="button" class="btn btn-default" name='detail_$id' onClick="Javascript:window.location.href = 'detail_pengajar.php?id= <?php echo $row['id'] ?>';">
+                      <button type="button" class="btn btn-default" onClick="Javascript:window.location.href = 'detail_pengajar.php?id=<?php echo $row['id'] ?>';"
                         <div class="pull-left">
                           <i class="fa fa-eye"></i> Detail
                         </div>
                       </button>
-                      <button type="button" class="btn btn-danger" name='detail_$id' onClick="">
+                      <button type="button" class="btn btn-danger"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'function/delete_pengajar.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
                         </div>
@@ -179,7 +188,7 @@
                   }
                   }
                 ?>
-                
+
                 </tbody>
                 <tfoot>
                 <tr>
@@ -230,18 +239,24 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
-</script>
+
+  <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#example1').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+          'copyHtml5',
+          'excelHtml5',
+          'csvHtml5',
+          'pdfHtml5'
+        ]
+      } );
+    } );
+  </script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Artikel</title>
@@ -36,7 +37,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -68,9 +69,6 @@
         Edukezy
         <small>Tambah Artikel</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -84,31 +82,37 @@
               <h3 class="box-title">Data Artikel</h3>
             </div>
             <!-- /.box-header -->
+            <form
+            <?php if($_SESSION['status']!=4){ ?>
+              action="function/add_artikel.php"
+            <?php } ?>
+            method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group">
                 <label for="fotoArtikel">Foto artikel</label>
-                <input type="file" id="fotoArtikel">
+                <input name="foto" type="file" id="fotoArtikel">
               </div>
               <div class="form-group">
                 <label for="judulArtikel">Judul Artikel</label>
-                <input type="text" class="form-control" id="judulArtikel" placeholder="judul artikel">
+                <input name="judul" type="text" class="form-control" id="judulArtikel" placeholder="judul artikel">
+              </div>
+              <div class="form-group">
+                <label for="judulArtikel">Author</label>
+                <input name="author" type="text" class="form-control" placeholder="author artikel">
               </div>
               <div class="form-group">
                 <label>Konten</label>
-                <form>
-                  <textarea id="konten" placeholder="konten artikel" name="konten" rows="10" cols="80">
-                  </textarea>
-                </form>
+                <textarea id="konten" placeholder="konten artikel" name="konten" rows="10" cols="80">
+                </textarea>
               </div>
               <!-- /.form group -->
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-              <div class=" pull-right">
-                <button type="submit" class="btn btn-default"><i class="fa fa-close"></i> Cancel</button>
-                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan</button>
-              </div>
+              <a href="artikel.php" class="btn btn-default"><i class="fa fa-close"></i> Cancel</a>
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Submit</button>
             </div>
+            </form>
           <!-- /.box-footer -->
           </div>
           <!-- /.box -->

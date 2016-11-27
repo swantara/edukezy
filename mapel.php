@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Mata Pelajaran</title>
@@ -36,7 +37,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -77,7 +78,11 @@
           <div class="box">
             <!-- /.box-header -->
             <div class="box-header with-border">
-              <a href="tambah_mapel.php" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Mapel</a>
+              <a
+              <?php if($_SESSION['status']!=4){ ?>
+                href="tambah_mapel.php"
+              <?php } ?>
+              class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Mapel</a>
             </div>
             <div class="box-body">
               <table class="table table-bordered">
@@ -107,7 +112,7 @@
 
                   if($rowcount > 0){
                     while($row = mysql_fetch_array($result)){
-                      ?>
+                ?>
 
                 <tr>
                   <input name='id' id='id' value='".$id."' type='hidden'>
@@ -116,7 +121,18 @@
                   <td><?php echo $row['tingkat_pendidikan'];?></td>
                   <td>
                     <div class="btn-group-vertical">
-                      <button type="button" class="btn btn-danger" name='detail_$id' onClick="Javascript:window.location.href = 'delete_program_edukasi.php?id= <?php echo $row['id'] ?>';">
+                      <button type="button" class="btn btn-default"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'update_mapel.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
+                        <div class="pull-left">
+                          <i class="fa fa-edit"></i> Update
+                        </div>
+                      </button>
+                      <button type="button" class="btn btn-danger"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'function/delete_mapel.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
                         </div>

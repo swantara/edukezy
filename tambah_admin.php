@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Tambah User</title>
@@ -36,7 +37,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -73,7 +74,11 @@
     <section class="content">
       <div class="col-xs-8">
         <div class="box">
-        <form action="function/add_admin.php" method="post">
+        <form
+        <?php if($_SESSION['status']!=4){ ?>
+          action="function/add_admin.php"
+        <?php } ?>
+        method="post">
           <div class="box-body">
             <!-- email -->
             <label>Isi form berikut</label>

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Admin</title>
@@ -18,6 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -36,7 +38,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -76,7 +78,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <a href="tambah_admin.php" class="btn btn-primary"><i class="fa fa-user-plus"></i> Tambah Admin</a>
+              <a
+              <?php if($_SESSION['status']!=4){ ?>
+                  href="tambah_admin.php"
+              <?php } ?>
+              class="btn btn-primary"><i class="fa fa-user-plus"></i> Tambah Admin</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -87,7 +93,6 @@
                   <th>Nama Admin</th>
                   <th>No Telepon</th>
                   <th>Alamat</th>
-                  <th style="width: 10px">Foto</th>
                   <th style="width: 10px">Act</th>
                 </tr>
                 </thead>
@@ -117,13 +122,12 @@
                   <td><?php echo $row['admin_cp'];?></td>
                   <td><?php echo $row['admin_alamat'];?></td>
                   <td>
-                    <a class="btn btn-default" href="<?php echo $IMG_ADMIN . $row['photo'];?>">
-                      <i class="fa fa-eye"></i> Lihat Foto
-                    </a>
-                  </td>
-                  <td>
                     <div class="btn-group-vertical">
-                      <button type="button" class="btn btn-danger" name='detail_$id' onClick="">
+                      <input type="hidden" name="id" value="<?=$row['id'];?>">
+                      <button type="button" class="btn btn-danger"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'function/delete_admin.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
                         </div>
@@ -137,7 +141,6 @@
                   }
                   }
                 ?>
-                
                 </tbody>
                 <tfoot>
                 <tr>
@@ -145,7 +148,6 @@
                   <th>Nama Admin</th>
                   <th>No Telepon</th>
                   <th>Alamat</th>
-                  <th>Foto</th>
                   <th>Act</th>
                 </tr>
                 </tfoot>
@@ -187,18 +189,24 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- page script -->
+
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
+  $(document).ready(function() {
+    $('#example1').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+        'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+      ]
+    } );
+  } );
 </script>
 </body>
 </html>

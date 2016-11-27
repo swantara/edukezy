@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Pengajar</title>
@@ -104,7 +105,7 @@
               FROM 
                 tb_pengajar AS p
               JOIN tb_users AS u ON u.id=p.user_id
-              JOIN tb_cabang AS c on c.id=p.zona_id
+              LEFT JOIN tb_cabang AS c on c.id=p.zona_id
               WHERE
                 p.id=$id_param";
               $result = mysql_query($query) or die(mysql_error());
@@ -127,8 +128,6 @@
                 <?php 
                   }
                 ?>
-                <label for="fotoProfil">Foto profil</label>
-                <input type="file" id="fotoProfil">
               </div>
             </div>
           </div>
@@ -171,7 +170,7 @@
               </div>   
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id='email' name='email' value="<?php echo $row['email'];?>">
+                <input type="email" class="form-control" id='email' name='email' disabled value="<?php echo $row['email'];?>">
               </div>
             </div>
             <div class="col-md-6">
@@ -180,8 +179,8 @@
                 <input type="text" class="form-control" id='telp' name='telp' value="<?php echo $row['pengajar_cp'];?>">
               </div>
               <div class="form-group">
-                <label for="ortuWali">Pendidikan Pengajar</label>
-                <input type="text" class="form-control" id="pendidikanPengajar" value="<?php echo $row['pengajar_pendidikan'];?>">
+                <label for="pendidikanPengajar">Pendidikan Pengajar</label>
+                <input name="pendidikanPengajar" type="text" class="form-control" id="pendidikanPengajar" value="<?php echo $row['pengajar_pendidikan'];?>">
               </div>
               <div class="form-group">
                 <label>Mata Pelajaran</label>
@@ -199,9 +198,13 @@
                     WHERE mp.pengajar_id=$id_param";
                     $resultC = mysql_query($queryC) or die(mysql_error());
                     $rowcountC = mysql_num_rows($resultC);
+                    $i=0;
+                    $mapelArray = NULL;
 
                     if($rowcountC > 0){
                       while($rowC = mysql_fetch_array($resultC)){
+                        $mapelArray[$i] = $rowC['mapel_id'];
+                        $i++;
                   ?>
 
                   <option value="<?= $rowC['mapel_id'];?>" selected><?php echo $rowC['nama_mapel'] . " (" . $rowC['tingkat'] . ")";?></option>
@@ -212,24 +215,30 @@
                   ?>
 
                   <?php
+                    if(!is_null($mapelArray)){
+                      $mapelPengajar = implode(", ", $mapelArray);
+                    }
+                    else{
+                      $mapelPengajar = "";
+                    }
                     include 'function/connection.php';
                     $queryD = "SELECT 
                       m.*,
                       tp.nama AS tingkat
                     FROM tb_mapel AS m
-                    JOIN tb_tingkat_pendidikan AS tp ON tp.id=m.tingkat_pendidikan";
+                    JOIN tb_tingkat_pendidikan AS tp ON tp.id=m.tingkat_pendidikan
+                    WHERE m.id NOT IN ('$mapelPengajar')
+                    ORDER BY m.nama";
                     $resultD = mysql_query($queryD) or die(mysql_error());
                     $rowcountD = mysql_num_rows($resultD);
 
                     if($rowcountD > 0){
                       while($rowD = mysql_fetch_array($resultD)){
-                        if($rowD['id']!=$rowC['mapel_id']){
                   ?>
                   
                   <option value="<?= $rowD['id'];?>"><?php echo $rowD['nama'] . " (" . $rowD['tingkat'] . ")";?></option>
 
                   <?php
-                        }
                       }
                     }
                   ?>
@@ -247,6 +256,7 @@
 
         <!-- /.box-body -->
         <div class="box-footer">
+          <input name="id" type="hidden" value="<?=$id_param;?>">
           <a href="user_pengajar.php" class="btn btn-default"><i class="fa fa-close"></i> Cancel</a>
           <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Submit</button>
         </div>

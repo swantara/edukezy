@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Program</title>
@@ -36,7 +37,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -86,7 +87,6 @@
                   <th style="width: 10px">No</th>
                   <th style="width: 150px">Nama Program</th>
                   <th>Biaya / Pertemuan</th>
-                  <th>Tambahan Biaya / 30 Menit</th>
                   <th style="width: 100px">Act</th>
                 </tr>
                 </thead>
@@ -112,15 +112,20 @@
                   <th><?php echo $nomer;?></th>
                   <td><?php echo $row['nama'];?></td>
                   <td><?php echo "Rp. " . $row['biaya'];?></td>
-                  <td><?php echo "Rp. " . $row['biaya_tambahan'];?></td>
                   <td>
                     <div class="btn-group-vertical">
-                      <button type="button" class="btn btn-default" name='detail_$id' onClick="Javascript:window.location.href = 'update_program_edukasi.php?id= <?php echo $row['id'] ?>';">
+                      <button type="button" class="btn btn-default"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'update_program_edukasi.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-edit"></i> Update
                         </div>
                       </button>
-                      <button type="button" class="btn btn-danger" name='detail_$id' onClick="Javascript:window.location.href = 'delete_program_edukasi.php?id= <?php echo $row['id'] ?>';">
+                      <button type="button" class="btn btn-danger"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'function/delete_program.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
                         </div>
@@ -139,12 +144,17 @@
               </table>
             </div>
             <div class="box-footer">
-              <a href="tambah_program.php" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Tambah Program</a>
+              <a
+              <?php if($_SESSION['status']!=4){ ?>
+                href="tambah_program.php"
+              <?php } ?>
+              class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Tambah Program</a>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
         </div>
+
         <!-- /.col -->
         <div class="col-md-6">
           <div class="box">
@@ -159,33 +169,72 @@
                   <th style="width: 10px"> No</th>
                   <th> Range Jarak</th>
                   <th> Biaya</th>
+                  <th style="width: 10px"> Act</th>
                 </tr>
                 </thead>
                 <tbody>
+
+                <?php
+                  include 'function/connection.php';
+                  $queryB = "SELECT 
+                    j.* 
+                  FROM 
+                    tb_jarak AS j
+                  ORDER BY
+                    j.jarak";
+                  $resultB = mysql_query($queryB) or die(mysql_error());
+
+                  $rowcountB = mysql_num_rows($resultB);
+                  $nomerB = 1;
+
+                  if($rowcountB > 0){
+                    while($rowB = mysql_fetch_array($resultB)){
+                      ?>
+
                 <tr>
-                  <th> 1</th>
-                  <td> < 10 kilometer</td>
-                  <td> -</td>
+                  <input name='id' id='id' value='".$id."' type='hidden'>
+                  <th><?php echo $nomerB;?></th>
+                  <td><?php echo "Lebih dari " . $rowB['jarak'] . " kilometer";?></td>
+                  <td><?php echo "Rp. " . $rowB['biaya'];?></td>
+                  <td>
+                    <div class="btn-group-vertical">
+                      <button type="button" class="btn btn-default"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'update_biaya_transport.php?id=<?php echo $rowB['id'] ?>';"
+                      <?php } ?>>
+                        <div class="pull-left">
+                          <i class="fa fa-edit"></i> Update
+                        </div>
+                      </button>
+                      <button type="button" class="btn btn-danger"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'function/delete_jarak.php?id=<?php echo $rowB['id'] ?>';"
+                      <?php } ?>>
+                        <div class="pull-left">
+                          <i class="fa fa-trash"></i> Delete
+                        </div>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
-                <tr>
-                  <th> 2</th>
-                  <td> < 20 kilometer</td>
-                  <td> Rp. 15.000</td>
-                </tr>
-                <tr>
-                  <th> 3</th>
-                  <td> < 30 kilometer</td>
-                  <td> Rp. 35.000</td>
-                </tr>
-                <tr>
-                  <th> 4</th>
-                  <td> > 40 kilometer</td>
-                  <td> Rp. 50.000</td>
-                </tr>
+
+                <?php
+                    $nomerB ++;
+                  }
+                  }
+                ?>
+
                 </tbody>
               </table>
             </div>
             <!-- /.box-body -->
+            <div class="box-footer">
+              <a
+              <?php if($_SESSION['status']!=4){ ?>
+                href="tambah_jarak.php"
+              <?php } ?>
+              class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Tambah Jarak</a>
+            </div>
           </div>
           <!-- /.box -->
         </div>
@@ -234,7 +283,10 @@
                   <td><?php echo "Rating " . $row['keterangan'];?></td>
                   <td><?php echo "Rp. " . $row['harga'];?></td>
                   <td>
-                    <button type="button" class="btn btn-default" name='detail_$id' onClick="Javascript:window.location.href = 'update_biaya_rating.php?id= <?php echo $row['id'] ?>';">
+                    <button type="button" class="btn btn-default"
+                    <?php if($_SESSION['status']!=4){ ?>
+                      onClick="Javascript:window.location.href = 'update_biaya_rating.php?id=<?php echo $row['id'] ?>';"
+                    <?php } ?>>
                       <div class="pull-left">
                         <i class="fa fa-edit"></i> Update
                       </div>
@@ -250,6 +302,96 @@
 
                 </tbody>
               </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+        <div class="col-md-6">
+          <div class="box">
+            <!-- /.box-header -->
+            <div class="box-header with-border">
+              <h3 class="box-title">Kelola Paket</h3>
+            </div>
+            <div class="box-body">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <th style="width: 10px"> No </th>
+                  <th> Nama </th>
+                  <th style="width: 10px"> Jml Pertemuan </th>
+                  <th> Durasi / Pertemuan </th>
+                  <th> Biaya </th>
+                  <th style="width: 100px"> Act </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php
+                  include 'function/connection.php';
+                  $queryC = "SELECT 
+                    p.*,
+                    harga
+                  FROM 
+                    tb_paket AS p
+                  JOIN tb_tarif AS t ON t.id = p.tarif_id
+                  ORDER BY 
+                    p.jumlah_pertemuan";
+                  $resultC = mysql_query($queryC) or die(mysql_error());
+
+                  $rowcountC = mysql_num_rows($resultC);
+                  $nomerC = 1;
+
+                  if($rowcountC > 0){
+                    while($rowC = mysql_fetch_array($resultC)){
+                ?>
+
+                <tr>
+                  <input name='id' id='id' value='".$id."' type='hidden'>
+                  <th><?php echo $nomerC;?></th>
+                  <td><?php echo $rowC['nama'];?></td>
+                  <td><?php echo $rowC['jumlah_pertemuan'] . " kali";?></td>
+                  <td><?php echo $rowC['durasi'] . " menit";?></td>
+                  <td><?php echo "Rp. " .$rowC['harga'];?></td>
+                  <td>
+                    <div class="btn-group-vertical">
+                      <button type="button" class="btn btn-default"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'update_paket.php?id=<?php echo $rowC['id'] ?>';"
+                      <?php } ?>>
+                        <div class="pull-left">
+                          <i class="fa fa-edit"></i> Update
+                        </div>
+                      </button>
+                      <button type="button" class="btn btn-danger"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'function/delete_paket.php?id=<?php echo $rowC['id'] ?>';"
+                      <?php } ?>>
+                        <div class="pull-left">
+                          <i class="fa fa-trash"></i> Delete
+                        </div>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <?php
+                    $nomerC ++;
+                  }
+                  }
+                ?>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="box-footer">
+              <a
+              <?php if($_SESSION['status']!=4){ ?>
+                href="tambah_paket.php"
+              <?php } ?>
+              class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Tambah Paket</a>
             </div>
             <!-- /.box-body -->
           </div>

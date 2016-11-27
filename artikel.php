@@ -36,7 +36,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -72,20 +72,16 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="box">
-        <div class="box-header">
-          <div class="col-xs-2">
-            <h4>Panel Kelola Artikel</h4>
-          </div>
-          <div class="col-xs-4">
-            <a href="#" target="_blank" class="btn btn-info"><i class="fa fa-edit"></i> Tambah Artikel</a>
-            <a href="#" class="btn btn-success"><i class="fa fa-bullhorn"></i> Broadcast Pesan</a>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
+            <div class="box-header">
+              <a
+              <?php if($_SESSION['status']!=4){ ?>
+                href="tambah_artikel.php"
+              <?php } ?>
+              class="btn btn-primary"><i class="fa fa-edit"></i> Tambah Artikel</a>
+            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -94,6 +90,7 @@
                   <th>No</th>
                   <th>Judul Artikel</th>
                   <th>Konten</th>
+                  <th>Author</th>
                   <th>Tanggal Publish</th>
                   <th>Gambar</th>
                   <th>Act</th>
@@ -121,25 +118,27 @@
                   <td><?php echo $nomer;?></td>
                   <td><?php echo $row['judul'];?></td>
                   <td><?php echo $row['content'];?></td>
+                  <td><?php echo $row['author'];?></td>
                   <td><?php echo $row['created_at'];?></td>
                   <td>
-                      <a class="btn btn-default" href="<?php echo "https://edukezy.com/images/article/" . $row['cover'];?>">
+                      <a class="btn btn-default" target="_blank" href="<?php echo $IMG_ARTIKEL . $row['cover'];?>">
                         <i class="fa fa-eye"></i> Lihat Gambar
                       </a>
                   </td>
                   <td>
-                    <div class="btn-group-vertical">                      
-                      <button type="button" class="btn btn-default">
-                        <div class="pull-left">
-                          <i class="fa fa-bullhorn"></i> Broadcast
-                        </div>
-                      </button>
-                      <button type="button" class="btn btn-default">
+                    <div class="btn-group-vertical">
+                      <button type="button" class="btn btn-default"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'update_artikel.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-edit"></i> Edit
                         </div>
                       </button>
-                      <button type="button" class="btn btn-danger">
+                      <button type="button" class="btn btn-danger"
+                      <?php if($_SESSION['status']!=4){ ?>
+                        onClick="Javascript:window.location.href = 'function/delete_artikel.php?id=<?php echo $row['id'] ?>';"
+                      <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
                         </div>
@@ -159,6 +158,7 @@
                   <th>No</th>
                   <th>Judul Artikel</th>
                   <th>Konten</th>
+                  <th>Author</th>
                   <th>Waktu Publish</th>
                   <th>Gambar</th>
                   <th>Act</th>

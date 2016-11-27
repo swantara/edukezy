@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Siswa</title>
@@ -34,7 +35,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -66,9 +67,6 @@
         Edukezy
         <small>Detail Siswa</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -123,8 +121,16 @@
                 if($_SESSION['type']=="AD"){
               ?>
 
-                <a href="#" class="btn btn-success btn-block"><i class="fa fa-check"></i><b> Bayar</b></a>
-                <button type="button" class="btn btn-primary btn-block" name='detail_$id' onClick="Javascript:window.location.href = 'update_siswa.php?id=<?php echo $row['id'] ?>';">
+                <button type="button" class="btn btn-success btn-block"
+                <?php if($_SESSION['status']!=4){ ?>
+                  onClick="Javascript:window.location.href = 'bayar_siswa.php?id=<?php echo $row['id'] ?>';"
+                <?php } ?>>
+                  <i class="fa fa-check"></i> Bayar
+                </button>
+                <button type="button" class="btn btn-primary btn-block"
+                <?php if($_SESSION['status']!=4){ ?>
+                  onClick="Javascript:window.location.href = 'update_siswa.php?id=<?php echo $row['id'] ?>';"
+                <?php } ?>>
                   <i class="fa fa-edit"></i> Update
                 </button>
 
@@ -164,7 +170,7 @@
               <p><?php echo $row['tingkat'];?></p>
               <hr>
               <strong><i class="fa fa-map-marker margin-r-5"></i> TTL</strong>
-              <p><?php echo $row['tempat_lahir'] . ", " . $row['tgl_lahir'];?></p>
+              <p><?php echo $row['tempat_lahir'] . ", " . date_format(date_create($row['tgl_lahir']), "d/m/Y");?></p>
 
               <?php
                   }

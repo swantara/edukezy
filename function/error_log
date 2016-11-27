@@ -1,0 +1,23 @@
+[13-Nov-2016 11:15:09 Asia/Jakarta] PHP Warning:  include(function/connection.php): failed to open stream: No such file or directory in /home/edukezyc/public_html/function/decline_calon_pengajar.php on line 3
+[13-Nov-2016 11:15:09 Asia/Jakarta] PHP Warning:  include(function/connection.php): failed to open stream: No such file or directory in /home/edukezyc/public_html/function/decline_calon_pengajar.php on line 3
+[13-Nov-2016 11:15:09 Asia/Jakarta] PHP Warning:  include(): Failed opening 'function/connection.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/edukezyc/public_html/function/decline_calon_pengajar.php on line 3
+[13-Nov-2016 11:15:09 Asia/Jakarta] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/edukezyc/public_html/function/decline_calon_pengajar.php on line 5
+[13-Nov-2016 11:15:09 Asia/Jakarta] PHP Warning:  mysql_query(): A link to the server could not be established in /home/edukezyc/public_html/function/decline_calon_pengajar.php on line 5
+[17-Nov-2016 11:33:07 Asia/Jakarta] PHP Warning:  mysql_connect(): No such file or directory in /home/edukezyc/public_html/function/connection.php on line 15
+[17-Nov-2016 11:34:06 Asia/Jakarta] PHP Warning:  mysql_connect(): No such file or directory in /home/edukezyc/public_html/function/connection.php on line 15
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'file' in /home/edukezyc/public_html/function/add_artikel.php on line 5
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'name' in /home/edukezyc/public_html/function/add_artikel.php on line 5
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'file' in /home/edukezyc/public_html/function/add_artikel.php on line 7
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'type' in /home/edukezyc/public_html/function/add_artikel.php on line 7
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'file' in /home/edukezyc/public_html/function/add_artikel.php on line 8
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'type' in /home/edukezyc/public_html/function/add_artikel.php on line 8
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'file' in /home/edukezyc/public_html/function/add_artikel.php on line 9
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'type' in /home/edukezyc/public_html/function/add_artikel.php on line 9
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'file' in /home/edukezyc/public_html/function/add_artikel.php on line 10
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'type' in /home/edukezyc/public_html/function/add_artikel.php on line 10
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'file' in /home/edukezyc/public_html/function/add_artikel.php on line 11
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'type' in /home/edukezyc/public_html/function/add_artikel.php on line 11
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'file' in /home/edukezyc/public_html/function/add_artikel.php on line 12
+[22-Nov-2016 12:13:16 Asia/Jakarta] PHP Warning:  Illegal string offset 'type' in /home/edukezyc/public_html/function/add_artikel.php on line 12
+[24-Nov-2016 13:37:44 Asia/Jakarta] PHP Warning:  date_format() expects parameter 1 to be DateTimeInterface, boolean given in /home/edukezyc/public_html/function/update_siswa.php on line 11
+[25-Nov-2016 22:28:57 Asia/Jakarta] PHP Warning:  mysql_connect(): Connection refused in /home/edukezyc/public_html/function/connection.php on line 15

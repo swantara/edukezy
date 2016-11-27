@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Program</title>
@@ -40,11 +41,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Edu</b>kezy</span>
+      <span class="logo-lg"><b>Edu</b>Edukasi</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -70,11 +71,8 @@
     <section class="content-header">
       <h1>
         Edukezy
-        <small>Update Biaya Transport</small>
+        <small>Update Data Biaya Transport</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="program.php"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -84,8 +82,9 @@
         <div class="col-md-12">
           <!-- About Me Box -->
           <div class="box box-primary">
+            <form action="function/update_biaya_transport.php" method="post">
             <div class="box-header with-border">
-              <h3 class="box-title">Data Program</h3>
+              <h3 class="box-title">Data Biaya Transport</h3>
             </div>
             <!-- /.box-header -->
 
@@ -93,14 +92,10 @@
                   $id_param = $_GET["id"];
                   include 'function/connection.php';
                   $query = "select 
-                    tb_program.id, 
-                    tb_program.nama,
-                    tb_program.biaya,
-                    tb_program.biaya_tambahan,
-                    tb_program.desk 
+                    j.*
                   from 
-                    tb_program
-                  where id = $id_param";
+                    tb_jarak AS j
+                  where j.id = $id_param";
                   $result = mysql_query($query) or die(mysql_error());
 
                   $rowcount = mysql_num_rows($result);
@@ -111,20 +106,12 @@
 
             <div class="box-body">
               <div class="form-group">
-                <label for="namaProgram">Nama Program</label>
-                <input type="text" class="form-control" id="namaProgram" value="<?php echo $row['nama'];?>">
+                <label for="namaProgram">Jarak (Lebih dari (x) kilometer)</label>
+                <input name="jarak" type="text" class="form-control" id="jarak" value="<?php echo $row['jarak'];?>">
               </div>
               <div class="form-group">
                 <label for="biaya">Biaya / Pertemuan</label>
-                <input type="text" class="form-control" id="biaya" value="<?php echo $row['biaya'];?>">
-              </div>  
-              <div class="form-group">
-                <label for="biayaTambahan">Biaya Tambahan / 30 Menit</label>
-                <input type="text" class="form-control" id="biayaTambahan" value="<?php echo $row['biaya_tambahan'];?>">
-              </div>
-              <div class="form-group">
-                <label for="deskripsi">Deskripsi</label>
-                <input type="text" class="form-control" id="deskripsi" value="<?php echo $row['desk'];?>">
+                <input name="biaya" type="text" class="form-control" id="biaya" value="<?php echo $row['biaya'];?>">
               </div>
 
                 <?php
@@ -136,12 +123,12 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-              <div class=" pull-right">
-                <button type="submit" class="btn btn-default"><i class="fa fa-close"></i> Cancel</button>
-                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan</button>
-              </div>
+              <input name="id" type="hidden" value="<?=$id_param?>">
+              <a href="program.php" class="btn btn-default"><i class="fa fa-close"></i> Cancel</a>
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Submit</button>
             </div>
           <!-- /.box-footer -->
+          </form>
           </div>
           <!-- /.box -->
         </div>

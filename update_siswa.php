@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Siswa</title>
@@ -36,7 +37,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -73,6 +74,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="box box-primary">
+      <form action="function/update_siswa.php" method="post">
         <div class="box-header with-border">
           <h3 class="box-title">Profil</h3>
         </div>
@@ -101,12 +103,22 @@
 
               if($rowcount > 0){
                 while($row = mysql_fetch_array($result)){
+                  $tgl_lahir = date_format(date_create($row['tgl_lahir']), "d-m-Y")
             ?>
 
               <div class="form-group">
-                <img class="profile-user-img img-responsive img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
-                <label for="fotoProfil">Foto profil</label>
-                <input type="file" id="fotoProfil">
+                <?php
+                  if($row['photo']==NULL){
+                ?>
+                <img class="profile-user-img img-responsive img-circle" src="dist/img/no-image.jpg" alt="User profile picture">
+                <?php 
+                  }
+                  else{
+                ?>
+                <img class="profile-user-img img-responsive img-circle" src="<?=$IMG_SISWA . $row['photo'];?>" alt="User profile picture">
+                <?php 
+                  }
+                ?>
               </div>
             </div>
           </div>
@@ -114,37 +126,83 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="namaSiswa">Nama</label>
-                <input type="text" class="form-control" id="namaSiswa" value="<?php echo $row['fullname'];?>">
+                <input name="nama" type="text" class="form-control" id="namaSiswa" value="<?php echo $row['fullname'];?>">
               </div>
               <div class="form-group">
                 <label for="alamatSiswa">Alamat</label>
-                <input type="text" class="form-control" id="alamatSiswa" value="<?php echo $row['alamat'];?>">
+                <input name="alamat" type="text" class="form-control" id="alamatSiswa" value="<?php echo $row['alamat'];?>">
               </div>
               <div class="form-group">
-                <label for="cabang">Cabang</label>
-                <input type="text" class="form-control" id="cabang" value="<?php echo $row['nama_cabang'];?>">
-              </div>   
+                <label for="zona_id">Cabang</label>
+                <select name="zona_id" class="form-control">
+                  <option value="<?= $row['zona_id'];?>" selected><?php echo $row['nama_cabang'];?></option>
+                  <?php
+                  include 'function/connection.php';
+                  $queryB = "SELECT 
+                    c.*
+                  FROM 
+                    tb_cabang AS c
+                  ORDER BY c.nama";
+                  $resultB = mysql_query($queryB) or die(mysql_error());
+
+                  $rowcountB = mysql_num_rows($resultB);
+
+                  if($rowcountB > 0){
+                    while($rowB = mysql_fetch_array($resultB)){
+                      if($rowB['id']!=$row['zona_id']){
+                        ?>
+                        <option value="<?= $rowB['id'];?>"><?= $rowB['nama'];?></option>
+                        <?php
+                      }
+                    }
+                  }
+                  ?>
+                </select>
+              </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" value="<?php echo $row['email'];?>">
+                <input name="email" type="email" disabled class="form-control" id="email" value="<?php echo $row['email'];?>">
               </div>
               <div class="form-group">
                 <label for="telp">No Telp</label>
-                <input type="text" class="form-control" id="telp" value="<?php echo $row['siswa_cp'];?>">
+                <input name="telp" type="text" class="form-control" id="telp" value="<?php echo $row['siswa_cp'];?>">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="ortuWali">Orang Tua / Wali</label>
-                <input type="text" class="form-control" id="ortuWali" value="<?php echo $row['siswa_wali'];?>">
+                <input name="ortu" type="text" class="form-control" id="ortuWali" value="<?php echo $row['siswa_wali'];?>">
               </div>
               <div class="form-group">
-                <label for="pendidikan">Pendidikan Terakhir</label>
-                <input type="text" class="form-control" id="pendidikan" value="<?php echo $row['tingkat'];?>">
+                <label>Tingkat Pendidikan</label>
+                <select name="tingkatPendidikan" class="form-control">
+                  <option value="<?= $row['siswa_pendidikan'];?>" selected><?php echo $row['tingkat'];?></option>
+                  <?php
+                  include 'function/connection.php';
+                  $queryB = "SELECT 
+                    tp.*
+                  FROM 
+                    tb_tingkat_pendidikan AS tp
+                  ORDER BY tp.nama";
+                  $resultB = mysql_query($queryB) or die(mysql_error());
+
+                  $rowcountB = mysql_num_rows($resultB);
+
+                  if($rowcountB > 0){
+                    while($rowB = mysql_fetch_array($resultB)){
+                      if($rowB['id']!=$row['siswa_pendidikan']){
+                        ?>
+                        <option value="<?= $rowB['id'];?>"><?= $rowB['nama'];?></option>
+                        <?php
+                      }
+                    }
+                  }
+                  ?>
+                </select>
               </div>
               <div class="form-group">
                 <label for="tempatLahir">Tempat Lahir</label>
-                <input type="text" class="form-control" id="tempatLahir" value="<?php echo $row['tempat_lahir'];?>">
+                <input name="tempatLahir" type="text" class="form-control" id="tempatLahir" value="<?php echo $row['tempat_lahir'];?>">
               </div>
               <!-- Date -->
               <div class="form-group">
@@ -153,7 +211,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" value="<?php echo $row['tgl_lahir'];?>">
+                  <input name="tglLahir" type="text" class="form-control pull-right" id="datepicker" data-date-format='dd-mm-yyyy' value="<?php echo $tgl_lahir ;?>">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -163,14 +221,12 @@
 
         <!-- /.box-body -->
         <div class="box-footer">
-          <input name='id' id='id' value='".$id."' type='hidden'>
-            <a class="btn btn-default pull-left" name='detail_$id' href="detail_siswa.php?id=<?php echo $row['id'] ?>">
-              <i class="fa fa-reply"></i> Cancel
-            </a>
-            <a class="btn btn-success pull-right" name='detail_$id' href="detail_siswa.php?id=<?php echo $row['id'] ?>">
-              <i class="fa fa-check"></i> Simpan
-            </a>
+          <input name="tglLahirOld" type="hidden" value="<?=$id_param;?>">
+          <input name="id" type="hidden" value="<?=$id_param;?>">
+          <a href="user_siswa.php" class="btn btn-default"><i class="fa fa-close"></i> Cancel</a>
+          <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Submit</button>
         </div>
+      </form>
       </div>
       <!-- /.box -->
 

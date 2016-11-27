@@ -36,7 +36,7 @@
         </div>
         <div class="pull-left info">
           <input name='id' id='id' value='".$id."' type='hidden'>
-          <p><a href="profil_admin.php?id= <?php echo $id_admin;?>"><?= $_SESSION['username'] ?></a></p>
+          <p><a href="profil_admin.php?id=<?php echo $id_admin;?>"><?= $_SESSION['username'] ?></a></p>
           <a><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -78,7 +78,16 @@
           </ul>
         </li>
         <li><a href="rating_pengajar.php"><i class="fa fa-star-o"></i> <span> Rating Pengajar</span></a></li>
-        <li><a href="artikel.php"><i class="fa fa-edit"></i> <span> Artikel dan Broadcast</span></a></li>
+        <li><a href="artikel.php"><i class="fa fa-edit"></i> <span> Artikel</span></a></li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-check"></i> <span> Request Jadwal</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="reschedule.php"><i class="fa fa-list"></i> Rubah Jadwal</a></li>
+            <li><a href="canceljadwal.php"><i class="fa fa-credit-card"></i> Pembatalan Jadwal</a></li>
+          </ul>
+        </li>
         <li class="header"> LOGOUT</li>
         <li><a href="function/logout.php"><i class="fa fa-power-off text-red"></i> <span> Logout</span></a></li>
       </ul>

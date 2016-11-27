@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Edukezy | Admin</title>
+  <title>Edukezy | Owner</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -34,7 +35,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -111,7 +112,7 @@
               ?>
               <h3 class="profile-username text-center"><?php echo $row['fullname'];?></h3>
               <input name='id' id='id' value='".$id."' type='hidden'>
-              <button type="button" class="btn btn-primary btn-block" name='detail_$id' onClick="Javascript:window.location.href = 'update_pengajar.php?id= <?php echo $row['id'] ?>';">
+              <button type="button" class="btn btn-primary btn-block" name='detail_$id' onClick="Javascript:window.location.href = 'update_owner.php?id=<?php echo $row['id'] ?>';">
                 <i class="fa fa-edit"></i> Update
               </button>
               

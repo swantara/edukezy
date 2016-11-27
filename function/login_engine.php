@@ -47,6 +47,7 @@ session_start();
 			$_SESSION['id'] = $row['id'];
 			$_SESSION['username'] = $row['nama_admin'];
 			$_SESSION['type'] = "AD";
+            $_SESSION['status'] = $row['status'];
 		}
 		else{
 			$_SESSION['id'] = $row['id'];
@@ -60,17 +61,13 @@ session_start();
 		$_SESSION['id'] = $row['id'];
 		$id_param = $_SESSION['id'];
 
-		//Memberitahu jika login sukses
-		echo "login berhasil..!!";
-
-		//redirect ke halaman lain untuk lebih memastikan
-		header( 'Location: ../index.php' );
+        echo "<script>location.href='../index.php';</script>";
 
 		}
 	}else{
 		//echo "Invalid username or password, try again..";
 		$_SESSION['error'] = "Invalid username or password, try again..";
-		header( 'Location: ../login.php' );		
+        echo "<script>location.href='../login.php';</script>";
 	}
 //}
 ?>

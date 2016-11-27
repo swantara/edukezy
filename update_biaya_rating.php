@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Program</title>
@@ -40,7 +41,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -72,9 +73,6 @@
         Edukezy
         <small>Update Data Program</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="program.php"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -84,6 +82,7 @@
         <div class="col-md-12">
           <!-- About Me Box -->
           <div class="box box-primary">
+          <form action="function/update_biaya_rating.php" method="post">
 
             <?php
               $id_param = $_GET["id"];
@@ -105,8 +104,8 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
-                <label for="namaProgram">Bonus / Pertemuan</label>
-                <input type="text" class="form-control" id="namaProgram" value="<?php echo $row['harga'];?>">
+                <label>Bonus / Pertemuan</label>
+                <input name="biaya" type="text" class="form-control" value="<?php echo $row['harga'];?>">
               </div>
               
                 <?php
@@ -118,12 +117,12 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-              <div class=" pull-right">
-                <button type="submit" class="btn btn-default"><i class="fa fa-close"></i> Cancel</button>
-                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Simpan</button>
-              </div>
+              <input name="id" type="hidden" value="<?=$id_param?>">
+              <a href="program.php" class="btn btn-default"><i class="fa fa-close"></i> Cancel</a>
+              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i> Submit</button>
             </div>
           <!-- /.box-footer -->
+          </form>
           </div>
           <!-- /.box -->
         </div>

@@ -21,7 +21,7 @@
 
         if($rowcount > 0){
           while($row = mysql_fetch_array($result)){
-          	$id_param = $row['user_id'];
+          	$id_param = $row['id'];
         }
     	}
             

@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Pengajar</title>
@@ -34,7 +35,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -66,9 +67,6 @@
         Edukezy
         <small>Detail Pengajar</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -90,7 +88,7 @@
                   u.email
                 FROM 
                   tb_pengajar AS p
-                INNER JOIN tb_cabang AS c ON c.id=p.zona_id
+                LEFT JOIN tb_cabang AS c ON c.id=p.zona_id
                 INNER JOIN tb_users AS u ON u.id=p.user_id
                 WHERE
                   p.id=$id_param";
@@ -122,7 +120,10 @@
                 if($_SESSION['type']=="AD"){
               ?>
 
-                <button type="button" class="btn btn-primary btn-block" name='detail_$id' onClick="Javascript:window.location.href = 'update_pengajar.php?id= <?php echo $row['id'] ?>';">
+                <button type="button" class="btn btn-primary btn-block" name='detail_$id'
+                <?php if($_SESSION['status']!=4){ ?>
+                  onClick="Javascript:window.location.href = 'update_pengajar.php?id=<?php echo $row['id'] ?>';"
+                <?php } ?>>
                   <i class="fa fa-edit"></i> Update
                 </button>
 
@@ -165,9 +166,9 @@
                   tp.nama AS tingkat
                 FROM 
                   tb_pengajar AS p
-                LEFT JOIN tb_mapel_pengajar AS mp ON mp.pengajar_id=p.id
-                LEFT JOIN tb_mapel AS m ON m.id=mp.mapel_id
-                LEFT JOIN tb_tingkat_pendidikan AS tp ON tp.id=m.tingkat_pendidikan
+                JOIN tb_mapel_pengajar AS mp ON mp.pengajar_id=p.id
+                JOIN tb_mapel AS m ON m.id=mp.mapel_id
+                JOIN tb_tingkat_pendidikan AS tp ON tp.id=m.tingkat_pendidikan
                 WHERE
                   p.id = $id_param";
 
@@ -179,10 +180,10 @@
                     if( $rowB['mata_pelajaran'] != NULL){
                       echo $rowB['mata_pelajaran'] . " (" . $rowB['tingkat'] . ") <br/>";
                     }
-                    else{
-                      echo "-";
-                    }
                   }
+                }
+                else{
+                  echo "-";
                 }
               ?>
 

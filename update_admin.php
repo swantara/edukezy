@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Admin</title>
@@ -46,7 +47,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -76,11 +77,8 @@
     <section class="content-header">
       <h1>
         Edukezy
-        <small>Update Data Pengajar</small>
+        <small>Update Data Admin</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="#"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <section class="content">
@@ -88,7 +86,7 @@
         <?php 
           $id_param = $_GET["id"];
         ?>
-        <form action="function/save_admin.php?id=<?php echo $id_param;?>" method="post">
+        <form action="function/update_admin.php?id=<?php echo $id_param;?>" method="post">
         <div class="box-header with-border">
           <h3 class="box-title">Profil</h3>
         </div>
@@ -100,9 +98,12 @@
             <?php
               include 'function/connection.php';
               $query = "SELECT 
-                a.*
+                a.*,
+                u.email,
+                u.password
               FROM 
                 tb_admin AS a
+              JOIN tb_users AS u ON u.id = a.admin_id
               WHERE
                 a.id=$id_param";
               $result = mysql_query($query) or die(mysql_error());
@@ -124,8 +125,6 @@
                 <?php 
                 }
                 ?>
-                <label for="fotoProfil">Foto profil</label>
-                <input type="file" id="fotoProfil" name="fotoProfil">
               </div>
             </div>
           </div>
@@ -144,6 +143,18 @@
               <div class="form-group">
                 <label for="telp">No Telp</label>
                 <input type="text" class="form-control" id='telp' name='telp' value="<?php echo $row['admin_cp'];?>">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id='email' name='email' disabled value="<?php echo $row['email'];?>">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id='password' name='password' placeholder="Isikan Jika Ingin Merubah Password">
               </div>
             </div>
           </div>

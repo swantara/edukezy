@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Tambah User</title>
@@ -38,7 +39,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -76,7 +77,11 @@
       <div class="row">
         <div class="col-xs-8">
           <div class="box">
-          <form action="function/add_admin.php" method="post" id="form_tambah">
+          <form
+          <?php if($_SESSION['status']!=4){ ?>
+            action="function/add_siswa.php"
+          <?php } ?>
+          method="post">
             <div class="box-body">
               <!-- email -->
               <label>Isi form berikut</label>
@@ -158,7 +163,27 @@
                   <div class="input-group-addon">
                     <i class="fa fa-graduation-cap"></i>
                   </div>
-                  <input name="pendidikan" type="pendidikan" class="form-control" placeholder="Pendidikan Terakhir">
+                  <select name="tingkatPendidikan" class="form-control">
+                    <option value="" disabled selected>Pilih Pendidikan Terakhir</option>
+                    <?php
+                    include 'function/connection.php';
+                    $query = "SELECT 
+                      tp.*
+                    FROM 
+                      tb_tingkat_pendidikan AS tp";
+                    $result = mysql_query($query) or die(mysql_error());
+
+                    $rowcount = mysql_num_rows($result);
+
+                    if($rowcount > 0){
+                      while($row = mysql_fetch_array($result)){
+                        ?>
+                        <option value="<?= $row['id'];?>"><?= $row['nama'];?></option>
+                        <?php
+                      }
+                    }
+                    ?>
+                  </select>
                 </div>
                 <!-- /.input group -->
               </div>
@@ -174,7 +199,11 @@
               </div>
 
               <div class="form-group">
-                <select class="form-control" form="form_tambah">
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-map-marker"></i>
+                  </div>
+                  <select name="zona_id" class="form-control">
                   <option value="" disabled selected>Pilih Cabang</option>
                 <?php
                   include 'function/connection.php';
@@ -190,12 +219,13 @@
                   if($rowcount > 0){
                     while($row = mysql_fetch_array($result)){
                 ?>
-                  <option><?= $row['nama'];?></option>
+                  <option value="<?= $row['id'];?>"><?= $row['nama'];?></option>
                 <?php
                     }
-                  }  
+                  }
                 ?>
                 </select>
+                </div>
               </div>
 
               <!-- /.form group -->

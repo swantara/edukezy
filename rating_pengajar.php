@@ -1,10 +1,67 @@
 <?php 
   include 'function/session.php';
+  include 'function/connection.php';
+
+  function getTingkatPendidikan($id)
+  {
+    $query = 'SELECT tp . * , t.nama
+          FROM  tb_tingkat_pendidikan_pengajar AS tp
+          JOIN tb_tingkat_pendidikan AS t ON tp.tingkat_pendidikan_id = t.id
+          WHERE tp.pengajar_id ='.$id;
+    $result = mysql_query($query) or die(mysql_error());
+
+    $rowcount = mysql_num_rows($result);
+    if($rowcount>0){
+      $tingkat = '';
+      while($row = mysql_fetch_array($result)){
+        $tingkat.= $row['nama'].', ';
+      }
+      return substr($tingkat, 0,-2);
+    }else{
+      return '<i style="color: #989ba0;">Belum isi tingkat pendidikan</i>';
+    }
+  }
+
+  function getMapel($id)
+  {
+    $query = 'SELECT tp . * , t.nama
+          FROM  tb_mapel_pengajar AS tp
+          JOIN tb_mapel AS t ON tp.mapel_id = t.id
+          WHERE tp.pengajar_id ='.$id;
+    $result = mysql_query($query) or die(mysql_error());
+
+    $rowcount = mysql_num_rows($result);
+    if($rowcount>0){
+      $tingkat = '';
+      while($row = mysql_fetch_array($result)){
+        $tingkat.= $row['nama'].', ';
+      }
+      return substr($tingkat, 0,-2);
+    }else{
+      return '<i style="color: #989ba0;">Belum isi mata pelajaran</i>';
+    }
+  }
+
+  function getRating($id)
+  {
+    $query = 'SELECT SUM(rating) AS total, COUNT(id) AS banyak FROM `tb_rating` WHERE pengajar_id = '.$id;
+    $result = mysql_query($query) or die(mysql_error());
+    $rowcount = mysql_num_rows($result);
+
+    if($rowcount>0){
+      $row = mysql_fetch_array($result);
+      $average = $row['total']>0 ? (float) $row['total']/$row['banyak'] : 0;
+      return round($average, 1, PHP_ROUND_HALF_DOWN);
+    }else{
+      return (float) 0;
+    }
+  }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Rating Pengajar</title>
@@ -36,7 +93,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -77,6 +134,18 @@
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
+              <?php
+              $query = 'SELECT 
+                          a.*,c.nama AS cabang 
+                        FROM 
+                          tb_pengajar AS a
+                        LEFT JOIN tb_cabang AS c ON a.zona_id = c.id';
+              $result = mysql_query($query) or die(mysql_error());
+
+              $rowcount = mysql_num_rows($result);
+              $nomer = 1;
+              echo $rowcount;
+              ?>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -92,17 +161,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Novarolista Banunaek</td>
-                  <td><img src="dist/img/user2-160x160.jpg" width="100px" height="100px" alt="User Image"></td>
-                  <td>SD, SMP</td>
-                  <td>Matematika, Bahasa Indonesia, Bahasa Inggris</td>
-                  <td>082144702247</td>
-                  <td>Lingk. Cepaka Kapal, Jalan Raya Kapal No. 57</td>
-                  <td>Subita</td>
-                  <td><i class="fa fa-star text-yellow"></i> 888 pt(s)</td>
-                </tr>
+                <?php if($rowcount>0): ?>
+                    <?php while($row = mysql_fetch_array($result)): ?>
+                      <tr>
+                        <td><?= $nomer ?></td>
+                        <td><?= $row['fullname'] ?></td>
+                        <td>
+                            <?php if($row['photo']!=null): ?>
+                              <img src="images/photo/pengajar/<?= $row['photo'] ?>" width="100px" height="100px" alt="User Image">
+                            <?php else: ?>
+                                <i style="color: #989ba0;">Belum isi photo</i>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= getTingkatPendidikan($row['id']) ?></td>
+                        <td><?= getMapel($row['id']) ?></td>
+                        <td><?= $row['pengajar_cp'] ?></td>
+                        <td><?= $row['pengajar_alamat'] ?></td>
+                        <td><?= $row['cabang'] == null ? '<i style="color: #989ba0;">Belum punya cabang</i>' : $row['cabang'] ?></td>
+                        <td><i class="fa fa-star text-yellow"></i> <?= getRating($row['id']) ?> pt(s)</td>
+                      </tr>
+                    <?php $nomer++; endwhile; ?>
+                <?php endif; ?>
                 </tbody>
                 <tfoot>
                 <tr>

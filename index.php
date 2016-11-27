@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Dashboard</title>
@@ -33,6 +34,19 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+  <link rel="manifest" href="/manifest.json">
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "35aab1a1-3fdc-4696-9efe-1c151c5072f4",
+      autoRegister: false,
+      notifyButton: {
+        enable: true /* Set to false to hide */
+      }
+    }]);
+  </script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

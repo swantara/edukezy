@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Edukezy | Calon Pengajar</title>
@@ -34,7 +35,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index.html" class="logo">
+    <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -66,9 +67,6 @@
         Edukezy
         <small>Detail Calon Pengajar</small>
       </h1>
-      <ol class="breadcrumb">
-        <li class="active"><a href="calon_pengajar.php"><i class="fa fa-reply"></i> Kembali</a></li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -113,10 +111,16 @@
 
               <h3 class="profile-username text-center"><?php echo $row['fullname'];?></h3>
               <input name='user_id' id='user_id' value='".$id."' type='hidden'>
-              <button type="button" class="btn btn-primary btn-block" name='detail_$id' onClick="Javascript:window.location.href = 'function/approve_calon_pengajar.php?id= <?php echo $row['user_id'] ?>';">
+              <button type="button" class="btn btn-primary btn-block"
+              <?php if($_SESSION['status']!=4){ ?>
+                onClick="Javascript:window.location.href = 'function/approve_calon_pengajar.php?id=<?php echo $row['user_id'] ?>';"
+              <?php } ?>>
                   <i class="fa fa-check"></i> <b>Approve</b>
               </button>
-              <button type="button" class="btn btn-danger btn-block" name='detail_$id' onClick="Javascript:window.location.href = 'decline_calon_pengajar.php?id= <?php echo $row['user_id'] ?>';">
+              <button type="button" class="btn btn-danger btn-block"
+              <?php if($_SESSION['status']!=4){ ?>
+                onClick="Javascript:window.location.href = 'function/decline_calon_pengajar.php?id=<?php echo $row['user_id'] ?>';"
+              <?php } ?>>
                   <i class="fa fa-trash"></i> <b>Decline</b>
               </button>
             </div>
