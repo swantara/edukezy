@@ -73,7 +73,7 @@
         </li>
         <li><a href="rating_pengajar_owner.php"><i class="fa fa-star-o"></i> <span> Rating Pengajar</span></a></li>
         <li class="header"> LOGOUT</li>
-        <li><a href="function/logout.php"><i class="fa fa-power-off text-red"></i> <span> Logout</span></a></li>
+        <li><a onclick="return confirm('Pilih OK untuk melanjutkan.')" href="function/logout.php"><i class="fa fa-power-off text-red"></i> <span> Logout</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

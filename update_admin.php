@@ -86,7 +86,7 @@
         <?php 
           $id_param = $_GET["id"];
         ?>
-        <form action="function/update_admin.php?id=<?php echo $id_param;?>" method="post">
+        <form onsubmit="return confirm('Pilih OK untuk melanjutkan.');" action="function/update_admin.php?id=<?php echo $id_param;?>" method="post">
         <div class="box-header with-border">
           <h3 class="box-title">Profil</h3>
         </div>

@@ -88,7 +88,7 @@
                   <th>Nama Calon Pengajar</th>
                   <th>No Telepon</th>
                   <th>Alamat</th>
-                  <th>Cabang</th>
+                  <th>Pendidikan Pengajar</th>
                   <th style="width: 10px">Act</th>
                 </tr>
                 </thead>
@@ -114,15 +114,7 @@
                         <td><?php echo $row['fullname'];?></td>
                         <td><?php echo $row['pengajar_cp'];?></td>
                         <td><?php echo $row['pengajar_alamat'];?></td>
-                        <td><?php
-                        if ($row['zona_id'] == 1) {
-                           echo "Sesetan";
-                        }elseif ($row['zona_id'] == 2) {
-                           echo "Subita"; 
-                        }elseif ($row['zona_id'] == null) {
-                           echo "Dalung"; 
-                        }                 
-                        ?></td>
+                        <td><?php echo $row['pengajar_pendidikan'];?></td>
                         <td>
                           <div class="btn-group-vertical">
                             <button type="button" class="btn btn-default" name='detail_$id' onClick="Javascript:window.location.href = 'detail_calon_pengajar.php?id=<?php echo $row['id'] ?>';">
@@ -145,7 +137,7 @@
                   <th>Nama Calon Pengajar</th>
                   <th>No Telepon</th>
                   <th>Alamat</th>
-                  <th>Cabang</th>
+                  <th>Pendidikan Pengajar</th>
                   <th>Act</th>
                 </tr>
                 </tfoot>
@@ -197,24 +189,23 @@ function export() {
 }
 </script>
 <!-- page script -->
-
-  <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#example1').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-          'copyHtml5',
-          'excelHtml5',
-          'csvHtml5',
-          'pdfHtml5'
-        ]
-      } );
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#example1').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+        'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+      ]
     } );
-  </script>
+  } );
+</script>
 </body>
 </html>

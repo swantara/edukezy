@@ -74,7 +74,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="box box-primary">
-      <form action="function/update_siswa.php" method="post">
+      <form onsubmit="return confirm('Pilih OK untuk melanjutkan.');" action="function/update_siswa.php" method="post">
         <div class="box-header with-border">
           <h3 class="box-title">Profil</h3>
         </div>

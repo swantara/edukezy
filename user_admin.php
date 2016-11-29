@@ -123,10 +123,10 @@
                   <td><?php echo $row['admin_alamat'];?></td>
                   <td>
                     <div class="btn-group-vertical">
-                      <input type="hidden" name="id" value="<?=$row['id'];?>">
                       <button type="button" class="btn btn-danger"
-                      <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/delete_admin.php?id=<?php echo $row['id'] ?>';"
+                      <?php
+                      if($_SESSION['status']!=4){ ?>
+                        onClick="deletePrompt(<?=$row['id'];?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
@@ -208,5 +208,15 @@
     } );
   } );
 </script>
+<!-- Button Function -->
+<script>
+function deletePrompt(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/delete_admin.php?id='+id;
+  }
+}
+</script>
+<!-- <a href="function/delete_admin.php?id=<?=$row['id'];?>" onclick="return confirm('Are you sure?')">Hapus</a> -->
 </body>
 </html>

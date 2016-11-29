@@ -133,7 +133,7 @@
                       </button>
                       <button type="button" class="btn btn-danger"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/delete_cabang.php?id=<?php echo $row['id'] ?>';"
+                        onClick="deletePrompt(<?=$row['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
@@ -198,23 +198,32 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- page script -->
-  <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-  <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#example1').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-          'copyHtml5',
-          'excelHtml5',
-          'csvHtml5',
-          'pdfHtml5'
-        ]
-      } );
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#example1').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+        'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+      ]
     } );
-  </script>
+  } );
+</script>
+<!-- Button Function -->
+<script>
+function deletePrompt(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/delete_cabang.php?id='+id;
+  }
+}
+</script>
 </body>
 </html>

@@ -182,7 +182,7 @@
                       <input name='id' id='id' value='".$id."' type='hidden'>
                       <button type="button" class="btn btn-default"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/pembayaran_valid.php?id= <?php echo $row['id'] ?>';"
+                        onClick="confirmPrompt(<?=$row['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-check text-green"></i> Valid
@@ -190,7 +190,7 @@
                       </button>
                       <button type="button" class="btn btn-default"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/pembayaran_invalid.php?id= <?php echo $row['id'] ?>';"
+                        onClick="declinePrompt(<?=$row['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-close text-red"></i> Tidak
@@ -278,4 +278,20 @@
     } );
   </script>
 </body>
+<!-- Button Function -->
+<script>
+function confirmPrompt(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/pembayaran_valid.php?id='+id;
+  }
+}
+
+function declinePrompt(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/pembayaran_invalid.php?id='+id;
+  }
+}
+</script>
 </html>

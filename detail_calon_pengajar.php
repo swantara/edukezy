@@ -113,13 +113,13 @@
               <input name='user_id' id='user_id' value='".$id."' type='hidden'>
               <button type="button" class="btn btn-primary btn-block"
               <?php if($_SESSION['status']!=4){ ?>
-                onClick="Javascript:window.location.href = 'function/approve_calon_pengajar.php?id=<?php echo $row['user_id'] ?>';"
+                onClick="acceptPrompt(<?=$row['user_id'];?>)"
               <?php } ?>>
                   <i class="fa fa-check"></i> <b>Approve</b>
               </button>
               <button type="button" class="btn btn-danger btn-block"
               <?php if($_SESSION['status']!=4){ ?>
-                onClick="Javascript:window.location.href = 'function/decline_calon_pengajar.php?id=<?php echo $row['user_id'] ?>';"
+                onClick="declinePrompt(<?=$row['user_id'];?>)"
               <?php } ?>>
                   <i class="fa fa-trash"></i> <b>Decline</b>
               </button>
@@ -198,5 +198,21 @@
 <script src="dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!-- Button Function -->
+<script>
+function acceptPrompt(id) {
+    var prompt = confirm("Pilih OK untuk melanjutkan.");
+    if (prompt == true) {
+        Javascript:window.location.href = 'function/approve_calon_pengajar.php?id='+id;
+    }
+}
+
+function declinePrompt(id) {
+    var prompt = confirm("Pilih OK untuk melanjutkan.");
+    if (prompt == true) {
+        Javascript:window.location.href = 'function/decline_calon_pengajar.php?id='+id;
+    }
+}
+</script>
 </body>
 </html>

@@ -91,7 +91,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-        <form action="function/update_pengajar.php" method="post">
+        <form onsubmit="return confirm('Pilih OK untuk melanjutkan.');" action="function/update_pengajar.php" method="post">
           <div class="row">
             <div class="col-md-6">
 

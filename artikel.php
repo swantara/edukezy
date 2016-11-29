@@ -137,7 +137,7 @@
                       </button>
                       <button type="button" class="btn btn-danger"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/delete_artikel.php?id=<?php echo $row['id'] ?>';"
+                        onClick="deletePrompt(<?=$row['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
@@ -214,6 +214,15 @@
       "autoWidth": false
     });
   });
+</script>
+<!-- Button Function -->
+<script>
+function deletePrompt(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/delete_artikel.php?id='+id;
+  }
+}
 </script>
 </body>
 </html>

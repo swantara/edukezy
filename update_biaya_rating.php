@@ -82,7 +82,7 @@
         <div class="col-md-12">
           <!-- About Me Box -->
           <div class="box box-primary">
-          <form action="function/update_biaya_rating.php" method="post">
+          <form onsubmit="return confirm('Pilih OK untuk melanjutkan.');" action="function/update_biaya_rating.php" method="post">
 
             <?php
               $id_param = $_GET["id"];

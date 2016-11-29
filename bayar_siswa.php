@@ -268,7 +268,7 @@
                       <input name='id' id='id' value='".$id."' type='hidden'>
                       <button type="button" class="btn btn-default"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/pembayaran_siswa.php?id=<?php echo $row['id'] ?>';"
+                        onClick="bayarPrompt(<?=$row['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-check text-green"></i> Bayar
@@ -346,6 +346,15 @@
       "autoWidth": false
     });
   });
+</script>
+<!-- Button Function -->
+<script>
+function bayarPrompt(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/pembayaran_siswa.php?id='+id;
+  }
+}
 </script>
 </body>
 </html>

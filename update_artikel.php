@@ -99,7 +99,7 @@ include 'function/session.php';
                             while ($row = mysql_fetch_array($result)) {
                                 ?>
 
-                            <form action="function/update_artikel.php" method="post" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Pilih OK untuk melanjutkan.');" action="function/update_artikel.php" method="post" enctype="multipart/form-data">
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="fotoArtikel">Foto artikel</label>

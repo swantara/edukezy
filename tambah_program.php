@@ -84,6 +84,7 @@
           <div class="box box-primary">
           <form
           <?php if($_SESSION['status']!=4){ ?>
+            onsubmit="return confirm('Pilih OK untuk melanjutkan.');"
             action="function/add_program.php"
           <?php } ?>
           method="post">

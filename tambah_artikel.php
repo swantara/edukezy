@@ -84,6 +84,7 @@
             <!-- /.box-header -->
             <form
             <?php if($_SESSION['status']!=4){ ?>
+              onsubmit="return confirm('Pilih OK untuk melanjutkan.');"
               action="function/add_artikel.php"
             <?php } ?>
             method="post" enctype="multipart/form-data">

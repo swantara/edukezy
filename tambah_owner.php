@@ -76,6 +76,7 @@
         <div class="box">
         <form
         <?php if($_SESSION['status']!=4){ ?>
+          onsubmit="return confirm('Pilih OK untuk melanjutkan.');"
           action="function/add_owner.php"
         <?php } ?>
         method="post">

@@ -82,7 +82,7 @@
         <div class="col-md-12">
           <!-- About Me Box -->
           <div class="box box-primary">
-            <form action="function/update_program.php" method="post">
+            <form onsubmit="return confirm('Pilih OK untuk melanjutkan.');" action="function/update_program.php" method="post">
             <div class="box-header with-border">
               <h3 class="box-title">Data Program</h3>
             </div>

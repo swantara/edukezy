@@ -124,7 +124,7 @@
                       </button>
                       <button type="button" class="btn btn-danger"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/delete_program.php?id=<?php echo $row['id'] ?>';"
+                        onClick="deleteProgram(<?=$row['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
@@ -208,7 +208,7 @@
                       </button>
                       <button type="button" class="btn btn-danger"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/delete_jarak.php?id=<?php echo $rowB['id'] ?>';"
+                        onClick="deleteTransportasi(<?=$rowB['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
@@ -367,7 +367,7 @@
                       </button>
                       <button type="button" class="btn btn-danger"
                       <?php if($_SESSION['status']!=4){ ?>
-                        onClick="Javascript:window.location.href = 'function/delete_paket.php?id=<?php echo $rowC['id'] ?>';"
+                        onClick="deletePaket(<?=$rowC['id']?>)"
                       <?php } ?>>
                         <div class="pull-left">
                           <i class="fa fa-trash"></i> Delete
@@ -441,6 +441,29 @@
       "autoWidth": false
     });
   });
+</script>
+<!-- Button Function -->
+<script>
+function deleteProgram(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/delete_program.php?id='+id;
+  }
+}
+
+function deleteTransportasi(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/delete_jarak.php?id='+id;
+  }
+}
+
+function deletePaket(id){
+  var prompt = confirm("Pilih OK untuk melanjutkan.")
+  if(prompt == true){
+    Javascript:window.location.href = 'function/delete_paket.php?id='+id;
+  }
+}
 </script>
 </body>
 </html>
