@@ -95,11 +95,11 @@
             <!-- /.box-header -->
               <div class="form-group">
                 <label for="namaProgram">Jarak (Lebih dari (x) kilometer)</label>
-                <input name="jarak" type="text" class="form-control" id="jarak" placeholder="jauh jarak">
+                <input required name="jarak" type="text" class="form-control" id="jarak" placeholder="jauh jarak">
               </div>
               <div class="form-group">
                 <label for="biaya">Biaya / Pertemuan (Rp.)</label>
-                <input name="biaya" type="text" class="form-control" id="biaya" placeholder="biaya">
+                <input required name="biaya" type="text" class="form-control" id="biaya" placeholder="biaya">
               </div>
               <!-- /.form group -->
             </div>

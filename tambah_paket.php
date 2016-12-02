@@ -95,23 +95,23 @@
             <!-- /.box-header -->
               <div class="form-group">
                 <label for="nama">Nama Paket</label>
-                <input name="nama" type="text" class="form-control" id="nama" placeholder="nama paket">
+                <input required name="nama" type="text" class="form-control" id="nama" placeholder="nama paket">
               </div>
               <div class="form-group">
                 <label for="jumlah_pertemuan">Jumlah Pertemuan</label>
-                <input name="jumlah_pertemuan" type="text" class="form-control" id="jumlah_pertemuan" placeholder="jumlah pertemuan">
+                <input required name="jumlah_pertemuan" type="text" class="form-control" id="jumlah_pertemuan" placeholder="jumlah pertemuan">
               </div>
               <div class="form-group">
                 <label for="durasi">Durasi / Pertemuan (menit)</label>
-                <input name="durasi" type="text" class="form-control" id="durasi" placeholder="durasi / pertemuan">
+                <input required name="durasi" type="text" class="form-control" id="durasi" placeholder="durasi / pertemuan">
               </div>
               <div class="form-group">
                 <label for="harga">Biaya (Rp.)</label>
-                <input name="harga" type="text" class="form-control" id="harga" placeholder="biaya">
+                <input required name="harga" type="text" class="form-control" id="harga" placeholder="biaya">
               </div>
               <div class="form-group">
                 <label for="keterangan">Keterangan</label>
-                <input name="keterangan" type="text" class="form-control" id="keterangan" placeholder="paket (x) kali pertemuan">
+                <input required name="keterangan" type="text" class="form-control" id="keterangan" placeholder="paket (x) kali pertemuan">
               </div>
               <!-- /.form group -->
             </div>

@@ -91,19 +91,19 @@
             <div class="box-body">
               <div class="form-group">
                 <label for="fotoArtikel">Foto artikel</label>
-                <input name="foto" type="file" id="fotoArtikel">
+                <input required name="foto" type="file" id="fotoArtikel">
               </div>
               <div class="form-group">
                 <label for="judulArtikel">Judul Artikel</label>
-                <input name="judul" type="text" class="form-control" id="judulArtikel" placeholder="judul artikel">
+                <input required name="judul" type="text" class="form-control" id="judulArtikel" placeholder="judul artikel">
               </div>
               <div class="form-group">
                 <label for="judulArtikel">Author</label>
-                <input name="author" type="text" class="form-control" placeholder="author artikel">
+                <input required name="author" type="text" class="form-control" placeholder="author artikel">
               </div>
               <div class="form-group">
                 <label>Konten</label>
-                <textarea id="konten" placeholder="konten artikel" name="konten" rows="10" cols="80">
+                <textarea id="konten" name="konten" rows="10" cols="80" required>
                 </textarea>
               </div>
               <!-- /.form group -->

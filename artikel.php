@@ -93,7 +93,7 @@
                   <th>Author</th>
                   <th>Tanggal Publish</th>
                   <th>Gambar</th>
-                  <th>Act</th>
+                  <th style="width : 10px;">Act</th>
                 </tr>
                 </thead>
                 <tbody>

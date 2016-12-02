@@ -88,7 +88,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-envelope"></i>
                 </div>
-                <input name="email" type="email" class="form-control" placeholder="Email">
+                <input required name="email" type="email" class="form-control" placeholder="Email">
               </div>
               <!-- /.input group -->
             </div>
@@ -100,7 +100,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-lock"></i>
                 </div>
-                <input name="password" type="password" class="form-control" placeholder="Password">
+                <input required name="password" type="password" class="form-control" placeholder="Password">
               </div>
               <!-- /.input group -->
             </div>
@@ -110,7 +110,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-user"></i>
                 </div>
-                <input name="nama" type="name" class="form-control" placeholder="Nama">
+                <input required name="nama" type="name" class="form-control" placeholder="Nama">
               </div>
               <!-- /.input group -->
             </div>
@@ -120,7 +120,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-map-marker"></i>
                 </div>
-                <input name="alamat" type="alamat" class="form-control" placeholder="Alamat">
+                <input required name="alamat" type="alamat" class="form-control" placeholder="Alamat">
               </div>
               <!-- /.input group -->
             </div>
@@ -130,13 +130,13 @@
                 <div class="input-group-addon">
                   <i class="fa fa-phone"></i>
                 </div>
-                <input name="telepon" type="telepon" class="form-control" placeholder="Telepon">
+                <input required name="telepon" type="telepon" class="form-control" placeholder="Telepon">
               </div>
               <!-- /.input group -->
             </div>
 
             <div class="form-group">
-              <select name="zona_id" class="form-control">
+              <select required name="zona_id" class="form-control">
                 <option value="" disabled selected>Pilih Cabang</option>
               <?php
                 include 'function/connection.php';

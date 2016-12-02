@@ -94,6 +94,7 @@
 
                   if($rowcount > 0){
                     while($row = mysql_fetch_array($result)){
+                      $id_pengajar = $row['user_id'];
               ?>
 
               <?php
@@ -159,6 +160,62 @@
               <strong><i class="fa fa-map-marker margin-r-5"></i> Alamat</strong>
 
               <p><?php echo $row['pengajar_alamat'];?></p>
+
+              <hr>
+
+              <strong><i class="fa fa-trophy margin-r-5"></i> Prestasi Pengajar</strong>
+
+              <p>
+              <?php
+                include 'function/connection.php';
+                $queryB = "SELECT 
+                  p.*
+                FROM 
+                  tb_prestasi_pengajar AS p
+                WHERE
+                  p.pengajar_id = $id_pengajar";
+                $resultB = mysql_query($queryB);
+                $rowcountB = mysql_num_rows($resultB);
+                if($rowcountB > 0){
+                  while($rowB = mysql_fetch_array($resultB)){
+                    if(!is_null($rowB['prestasi'])){
+                      echo $rowB['prestasi'] . "<br/>";
+                    }
+                  }
+                }
+                else{
+                  echo "-";
+                }
+              ?>
+              </p>
+
+              <hr>
+
+              <strong><i class="fa fa-book margin-r-5"></i> Mata Pelajaran yang Dikuasai</strong>
+
+              <p>
+              <?php
+                include 'function/connection.php';
+                $queryC = "SELECT 
+                  tp.*
+                FROM 
+                  tb_tingkat_pendidikan_calon_pengajar AS tp
+                WHERE
+                  tp.pengajar_id = $id_pengajar";
+                $resultC = mysql_query($queryC);
+                $rowcountC = mysql_num_rows($resultC);
+                if($rowcountC > 0){
+                  while($rowC = mysql_fetch_array($resultC)){
+                    if(!is_null($rowC['tingkat_pendidikan'])){
+                      echo $rowC['tingkat_pendidikan'] . "<br/>";
+                    }
+                  }
+                }
+                else{
+                  echo "-";
+                }
+              ?>
+              </p>
 
               <?php
                   }

@@ -95,19 +95,19 @@
             <div class="box-body">
               <div class="form-group">
                 <label for="namaCabang">Nama Cabang</label>
-                <input name="nama" type="text" class="form-control" id="namaCabang" placeholder="nama cabang">
+                <input required name="nama" type="text" class="form-control" id="namaCabang" placeholder="nama cabang">
               </div>
               <div class="form-group">
                 <label for="alamatCabang">Alamat</label>
-                <input name="alamat" type="text" class="form-control" id="alamatCabang" placeholder="alamat">
+                <input required name="alamat" type="text" class="form-control" id="alamatCabang" placeholder="alamat">
               </div>  
               <div class="form-group">
                 <label for="longitude">Longitude</label>
-                <input name="longitude" type="text" class="form-control" id="longitude" placeholder="longitude">
+                <input required name="longitude" type="text" class="form-control" id="longitude" placeholder="longitude">
               </div>
               <div class="form-group">
                 <label for="latitude">Latitude</label>
-                <input name="latitude" type="text" class="form-control" id="latitude" placeholder="latitude">
+                <input required name="latitude" type="text" class="form-control" id="latitude" placeholder="latitude">
               </div>
               <!-- /.form group -->
             </div>

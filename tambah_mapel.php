@@ -95,11 +95,11 @@
             <div class="box-body">
               <div class="form-group">
                 <label for="namaProgram">Nama Mapel</label>
-                <input name="nama" type="text" class="form-control" id="namaProgram" placeholder="Nama Mata Pelajaran">
+                <input required name="nama" type="text" class="form-control" id="namaProgram" placeholder="Nama Mata Pelajaran">
               </div>
               <div class="form-group">
               <label>Tingkat</label>
-                <select name="tingkat" class="form-control">
+                <select required name="tingkat" class="form-control">
                   <option value="" disabled selected hidden>Pilih Tingkat</option>
 
                   <?php

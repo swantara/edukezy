@@ -95,15 +95,15 @@
             <!-- /.box-header -->
               <div class="form-group">
                 <label for="namaProgram">Nama Program</label>
-                <input name="nama" type="text" class="form-control" id="namaProgram" placeholder="nama program">
+                <input required name="nama" type="text" class="form-control" id="namaProgram" placeholder="nama program">
               </div>
               <div class="form-group">
                 <label for="biaya">Biaya / Pertemuan (Rp.)</label>
-                <input name="biaya" type="text" class="form-control" id="biaya" placeholder="biaya">
+                <input required name="biaya" type="text" class="form-control" id="biaya" placeholder="biaya">
               </div>
               <div class="form-group">
                 <label for="deskripsi">Deskripsi Program</label>
-                <input name="deskripsi" type="text" class="form-control" id="deskripsi" placeholder="deskripsi">
+                <input required name="deskripsi" type="text" class="form-control" id="deskripsi" placeholder="deskripsi">
               </div>
               <!-- /.form group -->
             </div>
