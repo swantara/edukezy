@@ -11,7 +11,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="dist/img/favicon.ico">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Edukezy | Log in</title>
+  <title>SIBAZ | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -40,7 +40,7 @@
 <?php unset($_SESSION['error']);endif; ?>
 <div class="login-box">
   <div class="login-logo">
-    <a href="login.html"><b>Edu</b>Kezy</a>
+    <a href="login.html"><b>SI</b>Bazzar</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

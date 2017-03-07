@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "bazzar_stwk";
+$dbname = "edukezc_main";
 $IMG_PEMBAYARAN = "https://edukezy.com/images/buktipembayaran/";
 $IMG_ARTIKEL = "https://edukezy.com/images/article/";
 $IMG_ADMIN = "https://edukezy.com/images/photo/admin/";

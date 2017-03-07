@@ -5,6 +5,6 @@
 	
 	if($query){
 		echo "<script>alert('Data berhasil disimpan.');</script>";
-		echo "<script>location.href='../calon_pengajar.php';</script>";
+		echo "<script>location.href='../confirm_email.php';</script>";
 	}
 ?>
